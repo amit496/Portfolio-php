@@ -15,9 +15,145 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Toaster Message Styles -->
+    <style>
+        .toaster-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 10000;
+            max-width: 400px;
+        }
+
+        .toaster-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 4px solid #fbbf24;
+        }
+
+        .toaster-message.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toaster-message.hide {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+
+        .toaster-message.success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-left-color: #34d399;
+        }
+
+        .toaster-message.error {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-left-color: #f87171;
+        }
+
+        .toaster-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .toaster-content {
+            flex: 1;
+        }
+
+        .toaster-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .toaster-text {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .toaster-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .toaster-close:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.5);
+            width: 100%;
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: white;
+            animation: progress 5s linear forwards;
+        }
+
+        @keyframes progress {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .toaster-container {
+                top: 80px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+
+            .toaster-message {
+                transform: translateY(-100px);
+            }
+
+            .toaster-message.show {
+                transform: translateY(0);
+            }
+
+            .toaster-message.hide {
+                transform: translateY(-100px);
+            }
+        }
+    </style>
 </head>
 
 <body class="text-white overflow-x-hidden">
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toaster-container"></div>
+
     <canvas id="three-canvas"></canvas>
 
     <div class="code-rain" id="code-rain"></div>
@@ -98,7 +234,6 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
     <!-- Mobile Menu -->
     <div class="mobile-menu hidden md:hidden fixed top-0 left-0 w-full h-full glass-effect bg-opacity-95 z-50"
         id="mobile-menu">
@@ -819,112 +954,6 @@
     </section>
 
     <!-- Contact Section -->
-    <!-- <section id="contact" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">Get In Touch</h2>
-            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
-                <div class="space-y-8">
-                    <div class="card-3d glass-effect p-8 rounded-2xl equal-height">
-                        <h3 class="text-2xl font-bold mb-6 text-yellow-400">Contact Information</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-12 h-12 bg-yellow-400 bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user text-yellow-400"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Name</h4>
-                                    <p class="text-gray-300">Amit Gautam</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-12 h-12 bg-yellow-400 bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-envelope text-yellow-400"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Email</h4>
-                                    <p class="text-gray-300">
-                                        <a href="mailto:Gautamamit557@gmail.com"
-                                            class="text-white">Gautamamit557@gmail.com</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-12 h-12 bg-yellow-400 bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-phone text-yellow-400"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Phone</h4>
-                                    <p class="text-gray-300">
-                                        <a href="tel:+918573965259" class="text-white">+91 8573965259</a>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center space-x-4">
-                                <div
-                                    class="w-12 h-12 bg-yellow-400 bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-map-marker-alt text-yellow-400"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Address</h4>
-                                    <p class="text-gray-300">Aminabad, Lucknow, Uttar Pradesh, India</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="card-3d glass-effect p-8 rounded-2xl">
-                        <h3 class="text-2xl font-bold mb-4 text-center text-yellow-400">Find Me Here</h3>
-                        <div class="w-full h-64 bg-gray-700 rounded-lg overflow-hidden">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31757.87367011658!2d80.83565708534187!3d26.84923132989213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfdc48716ecad%3A0x80a5111ef7198c49!2sKundari%20Rakabganj%2C%20Lucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1706927400000!5m2!1sen!2sin"
-                                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"
-                                title="Location map of Aminabad, Lucknow, Uttar Pradesh, India">
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <form class="contact-form card-3d glass-effect p-8 rounded-2xl">
-                    <h3 class="text-2xl font-bold mb-6 text-center text-yellow-400">Send Message</h3>
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
-                        <input type="text" placeholder="Your Name"
-                            class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400">
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
-                        <input type="email" placeholder="Your Email"
-                            class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400">
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Subject *</label>
-                        <input type="text" placeholder="Subject"
-                            class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400">
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Message *</label>
-                        <textarea placeholder="Your Message" rows="6"
-                            class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400"></textarea>
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-yellow-400 text-gray-900 font-bold py-4 rounded-lg hover:bg-yellow-300 transform hover:scale-105 transition-all duration-300 text-lg">
-                        <i class="fas fa-paper-plane mr-2"></i>Send Message
-                    </button>
-                    <p class="text-xs text-gray-400 text-center mt-6">* Required fields</p>
-                </form>
-            </div>
-        </div>
-    </section> -->
-
-
-
-    <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-800">
         <div class="container mx-auto px-6">
             <h2 class="section-heading">Get In Touch</h2>
@@ -995,11 +1024,8 @@
                     </div>
                 </div>
 
-                <form class="contact-form card-3d glass-effect p-8 rounded-2xl" id="contact-form">
+                <form class="contact-form card-3d glass-effect p-8 rounded-2xl" id="contact-form" action="send_email.php" method="post">
                     <h3 class="text-2xl font-bold mb-6 text-center text-yellow-400">Send Message</h3>
-
-                    <!-- Success/Error Messages -->
-                    <div id="form-messages" class="hidden mb-6 p-4 rounded-lg"></div>
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
@@ -1030,6 +1056,7 @@
             </div>
         </div>
     </section>
+
     <!-- Footer -->
     <footer class="bg-black py-8 text-center border-t border-gray-800">
         <p class="text-gray-400 text-lg">&copy; 2025 Amit Gautam Portfolio.</p>

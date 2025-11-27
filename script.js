@@ -207,78 +207,6 @@ $(document).ready(function () {
         $('html, body').animate({ scrollTop: 0 }, 800);
     });
 
-    // Contact form submission
-    // $('.contact-form').submit(function (e) {
-    //     e.preventDefault();
-    //     const btn = $(this).find('button');
-    //     const originalText = btn.html();
-
-    //     btn.html('<i class="fas fa-spinner fa-spin mr-2"></i>Sending...').prop('disabled', true);
-
-    //     setTimeout(() => {
-    //         btn.html('<i class="fas fa-check mr-2"></i>Message Sent!').removeClass('bg-yellow-400').addClass('bg-green-500');
-
-    //         setTimeout(() => {
-    //             $(this)[0].reset();
-    //             btn.html(originalText).removeClass('bg-green-500').addClass('bg-yellow-400').prop('disabled', false);
-    //         }, 3000);
-    //     }, 2000);
-    // });
-
-    // Contact form submission - UPDATED
-    $('#contact-form').submit(function (e) {
-        e.preventDefault();
-
-        const btn = $(this).find('button');
-        const originalText = btn.html();
-        const formMessages = $('#form-messages');
-
-        // Show loading state
-        btn.html('<i class="fas fa-spinner fa-spin mr-2"></i>Sending...').prop('disabled', true);
-        formMessages.addClass('hidden').removeClass('bg-green-500 bg-red-500').text('');
-
-        // Form data collect karo
-        const formData = {
-            name: $('input[name="name"]').val(),
-            email: $('input[name="email"]').val(),
-            subject: $('input[name="subject"]').val(),
-            message: $('textarea[name="message"]').val()
-        };
-
-        // AJAX request to PHP
-        $.ajax({
-            url: 'send_email.php',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function (response) {
-                if (response.success) {
-                    // Success message
-                    formMessages.removeClass('hidden').addClass('bg-green-500').text(response.message);
-                    btn.html('<i class="fas fa-check mr-2"></i>Message Sent!');
-
-                    // Form reset karo
-                    $('#contact-form')[0].reset();
-
-                    // 5 seconds baad button reset karo
-                    setTimeout(() => {
-                        btn.html(originalText).prop('disabled', false);
-                        formMessages.addClass('hidden');
-                    }, 5000);
-                } else {
-                    // Error message
-                    formMessages.removeClass('hidden').addClass('bg-red-500').text(response.message);
-                    btn.html(originalText).prop('disabled', false);
-                }
-            },
-            error: function () {
-                // Network error
-                formMessages.removeClass('hidden').addClass('bg-red-500').text('Network error. Please try again later.');
-                btn.html(originalText).prop('disabled', false);
-            }
-        });
-    });
-
     // Advanced typing effect
     const texts = [
         'Software Engineer 💻',
@@ -346,11 +274,100 @@ $(document).ready(function () {
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Add loading animation
-    $('body').css('opacity', '0');
-    $(window).on('load', function () {
-        $('body').animate({ opacity: 1 }, 1500);
-    });
+    // REMOVED: Loading animation that was causing the flicker
+    // $('body').css('opacity', '0');
+    // $(window).on('load', function () {
+    //     $('body').animate({ opacity: 1 }, 1500);
+    // });
 
     console.log('🚀 Amit Gautam Portfolio loaded successfully!');
+});
+
+
+
+// Toaster message function
+function showToaster(message, type = 'info') {
+    const toasterContainer = document.getElementById('toaster-container');
+    const toasterId = 'toaster-' + Date.now();
+
+    const toasterHTML = `
+                <div class="toaster-message ${type}" id="${toasterId}">
+                    <div class="toaster-content">
+                        <div class="toaster-title">
+                            ${type === 'success' ? 'Success!' : type === 'error' ? 'Error!' : 'Info'}
+                        </div>
+                        <div class="toaster-text">${message}</div>
+                    </div>
+                    <button class="toaster-close" onclick="closeToaster('${toasterId}')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="progress-bar"></div>
+                </div>
+            `;
+
+    toasterContainer.insertAdjacentHTML('beforeend', toasterHTML);
+
+    const toasterElement = document.getElementById(toasterId);
+
+    // Show toaster with animation
+    setTimeout(() => {
+        toasterElement.classList.add('show');
+    }, 100);
+
+    // Auto remove after 5 seconds
+    const autoRemove = setTimeout(() => {
+        closeToaster(toasterId);
+    }, 5000);
+
+    // Store timeout ID for manual close
+    toasterElement.setAttribute('data-timeout', autoRemove);
+}
+
+function closeToaster(toasterId) {
+    const toasterElement = document.getElementById(toasterId);
+    if (!toasterElement) return;
+
+    // Clear auto-remove timeout
+    const timeoutId = toasterElement.getAttribute('data-timeout');
+    if (timeoutId) clearTimeout(timeoutId);
+
+    // Hide with animation
+    toasterElement.classList.remove('show');
+    toasterElement.classList.add('hide');
+
+    // Remove from DOM after animation
+    setTimeout(() => {
+        if (toasterElement.parentNode) {
+            toasterElement.parentNode.removeChild(toasterElement);
+        }
+    }, 500);
+}
+
+// Check URL parameters and show toaster messages
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const message = urlParams.get('message');
+
+    if (status && message) {
+        const decodedMessage = decodeURIComponent(message);
+
+        if (status === 'success') {
+            showToaster(decodedMessage, 'success');
+        } else if (status === 'error') {
+            showToaster(decodedMessage, 'error');
+        }
+
+        // Clean URL (remove parameters)
+        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+    }
+});
+
+// Close toaster on click anywhere on toaster (except close button)
+document.addEventListener('click', function (e) {
+    if (e.target.closest('.toaster-message') && !e.target.closest('.toaster-close')) {
+        const toaster = e.target.closest('.toaster-message');
+        closeToaster(toaster.id);
+    }
 });

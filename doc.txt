@@ -1,0 +1,14 @@
+inp5gSReWWRBz2
+
+Website for amit-gautam.infinityfreeapp.com
+
+
+
+
+$SMTP_PASS = "sfusdxojgnacmscb"; 
+
+
+// <div class="toaster-icon">
+//     ${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}
+//     ${type === 'success' ? 'Success!' : type === 'error' ? 'Error!' : 'Info'}
+// </div>
