@@ -371,3 +371,219 @@ document.addEventListener('click', function (e) {
         closeToaster(toaster.id);
     }
 });
+
+// Add this to your script.js file
+
+// Enhanced form validation and submission
+$(document).ready(function() {
+    // Real-time validation functions
+    function validateName(name) {
+        if (name.trim() === '') {
+            return { valid: false, message: 'Name is required' };
+        }
+        if (name.trim().length < 2) {
+            return { valid: false, message: 'Name must be at least 2 characters' };
+        }
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+            return { valid: false, message: 'Name should only contain letters' };
+        }
+        return { valid: true, message: '' };
+    }
+
+    function validateEmail(email) {
+        if (email.trim() === '') {
+            return { valid: false, message: 'Email is required' };
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return { valid: false, message: 'Please enter a valid email address' };
+        }
+        return { valid: true, message: '' };
+    }
+
+    function validateSubject(subject) {
+        if (subject.trim() === '') {
+            return { valid: false, message: 'Subject is required' };
+        }
+        if (subject.trim().length < 3) {
+            return { valid: false, message: 'Subject must be at least 3 characters' };
+        }
+        return { valid: true, message: '' };
+    }
+
+    function validateMessage(message) {
+        if (message.trim() === '') {
+            return { valid: false, message: 'Message is required' };
+        }
+        if (message.trim().length < 10) {
+            return { valid: false, message: 'Message must be at least 10 characters' };
+        }
+        return { valid: true, message: '' };
+    }
+
+    // Show error message
+    function showError(input, message) {
+        const formGroup = input.parent();
+        formGroup.addClass('error');
+        
+        // Remove existing error message
+        formGroup.find('.error-message').remove();
+        
+        // Add new error message
+        input.after(`<div class="error-message" style="color: #ef4444; font-size: 12px; margin-top: 5px; animation: slideDown 0.3s ease;">${message}</div>`);
+        input.addClass('border-red-500');
+    }
+
+    // Clear error message
+    function clearError(input) {
+        const formGroup = input.parent();
+        formGroup.removeClass('error');
+        formGroup.find('.error-message').remove();
+        input.removeClass('border-red-500').addClass('border-gray-600');
+    }
+
+    // Real-time validation on blur
+    $('input[name="name"]').on('blur', function() {
+        const result = validateName($(this).val());
+        if (!result.valid) {
+            showError($(this), result.message);
+        } else {
+            clearError($(this));
+        }
+    });
+
+    $('input[name="email"]').on('blur', function() {
+        const result = validateEmail($(this).val());
+        if (!result.valid) {
+            showError($(this), result.message);
+        } else {
+            clearError($(this));
+        }
+    });
+
+    $('input[name="subject"]').on('blur', function() {
+        const result = validateSubject($(this).val());
+        if (!result.valid) {
+            showError($(this), result.message);
+        } else {
+            clearError($(this));
+        }
+    });
+
+    $('textarea[name="message"]').on('blur', function() {
+        const result = validateMessage($(this).val());
+        if (!result.valid) {
+            showError($(this), result.message);
+        } else {
+            clearError($(this));
+        }
+    });
+
+    // Clear error on input
+    $('#contact-form input, #contact-form textarea').on('input', function() {
+        if ($(this).hasClass('border-red-500')) {
+            clearError($(this));
+        }
+    });
+
+    // AJAX Form Submission
+    $('#contact-form').on('submit', function(e) {
+        e.preventDefault();
+
+        // Get form values
+        const name = $('input[name="name"]').val();
+        const email = $('input[name="email"]').val();
+        const subject = $('input[name="subject"]').val();
+        const message = $('textarea[name="message"]').val();
+
+        // Validate all fields
+        const nameValidation = validateName(name);
+        const emailValidation = validateEmail(email);
+        const subjectValidation = validateSubject(subject);
+        const messageValidation = validateMessage(message);
+
+        let hasError = false;
+
+        if (!nameValidation.valid) {
+            showError($('input[name="name"]'), nameValidation.message);
+            hasError = true;
+        }
+        if (!emailValidation.valid) {
+            showError($('input[name="email"]'), emailValidation.message);
+            hasError = true;
+        }
+        if (!subjectValidation.valid) {
+            showError($('input[name="subject"]'), subjectValidation.message);
+            hasError = true;
+        }
+        if (!messageValidation.valid) {
+            showError($('textarea[name="message"]'), messageValidation.message);
+            hasError = true;
+        }
+
+        if (hasError) {
+            return false;
+        }
+
+        // Get submit button
+        const submitBtn = $(this).find('button[type="submit"]');
+        const originalBtnText = submitBtn.html();
+
+        // Disable button and show loader
+        submitBtn.prop('disabled', true)
+                 .html('<i class="fas fa-spinner fa-spin mr-2"></i>Sending...');
+
+        // Prepare form data
+        const formData = {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+        };
+
+        // AJAX Request
+        $.ajax({
+            url: 'send_email.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                // Re-enable button
+                submitBtn.prop('disabled', false).html(originalBtnText);
+
+                if (response.status === 'success') {
+                    // Show success message in form
+                    $('#contact-form').html(`
+                        <div class="success-message text-center py-12">
+                            <div class="mb-6">
+                                <i class="fas fa-check-circle text-green-400 text-6xl mb-4 animate-bounce"></i>
+                                <h3 class="text-2xl font-bold text-green-400 mb-2">Message Sent Successfully!</h3>
+                                <p class="text-gray-300 mb-6">${response.message}</p>
+                                <button onclick="location.reload()" class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-300 transform hover:scale-105 transition-all duration-300">
+                                    <i class="fas fa-redo mr-2"></i>Send Another Message
+                                </button>
+                            </div>
+                        </div>
+                    `);
+
+                    // Scroll to success message
+                    $('html, body').animate({
+                        scrollTop: $('#contact').offset().top - 100
+                    }, 500);
+                } else {
+                    // Show error in form
+                    showError(submitBtn.parent(), response.message || 'Something went wrong. Please try again.');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Re-enable button
+                submitBtn.prop('disabled', false).html(originalBtnText);
+                
+                // Show error message
+                showError(submitBtn.parent(), 'Failed to send message. Please try again or contact directly via email.');
+            }
+        });
+
+        return false;
+    });
+});

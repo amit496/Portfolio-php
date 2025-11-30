@@ -7,9 +7,15 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
+// Set JSON response header
+header('Content-Type: application/json');
+
 // POST request check
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: index.php?status=error&message=Only+POST+requests+allowed");
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Only POST requests allowed'
+    ]);
     exit;
 }
 
@@ -21,12 +27,42 @@ $message = isset($_POST['message']) ? trim($_POST['message']) : '';
 
 // Validation
 if (empty($name) || empty($email) || empty($subject) || empty($message)) {
-    header("Location: index.php?status=error&message=All+fields+are+required");
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'All fields are required'
+    ]);
+    exit;
+}
+
+if (strlen($name) < 2) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Name must be at least 2 characters'
+    ]);
     exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    header("Location: index.php?status=error&message=Invalid+email+address");
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Invalid email address'
+    ]);
+    exit;
+}
+
+if (strlen($subject) < 3) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Subject must be at least 3 characters'
+    ]);
+    exit;
+}
+
+if (strlen($message) < 10) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Message must be at least 10 characters'
+    ]);
     exit;
 }
 
@@ -40,11 +76,10 @@ $date = date('d M Y, h:i A');
 // Gmail SMTP Config
 $SMTP_HOST = "smtp.gmail.com";
 $SMTP_USER = "gautamamit557@gmail.com";
-$SMTP_PASS = "sfusdxojgnacmscb";   // FIXED: NO SPACES
+$SMTP_PASS = "sfusdxojgnacmscb";
 $SMTP_PORT = 587;
 
 try {
-    
     // ============================================
     //  EMAIL TO YOU (AMIT)
     // ============================================
@@ -198,13 +233,19 @@ try {
     
     $userMail->send();
     
-    // SUCCESS - Redirect to index.php
-    header("Location: index.php?status=success&message=Thank+you+for+your+message!+I+will+get+back+to+you+soon.");
+    // SUCCESS - Return JSON response
+    echo json_encode([
+        'status' => 'success',
+        'message' => 'Thank you for your message! I will get back to you soon.'
+    ]);
     exit;
     
 } catch (Exception $e) {
-    // ERROR - Redirect to index.php with error message
-    header("Location: index.php?status=error&message=Failed+to+send+message.+Please+try+again.");
+    // ERROR - Return JSON response
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Failed to send message. Please try again or contact directly via email.'
+    ]);
     exit;
 }
 ?>

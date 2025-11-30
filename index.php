@@ -6,148 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amit Gautam - Software Engineer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets\jquery.min.js"></script>
+    
+    <script src="assets\owlcarousel\js\owl.carousel.min.js"></script>
+    <script src="assets\fontawesome\css\all.min.css"></script>
+    <script src="assets\fontawesome\js\all.min.js"></script>
+
+    <link rel="stylesheet" href="assets\owlcarousel\css\owl.carousel.min.css">
+    <link rel="stylesheet" href="assets\owlcarousel\css\owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets\leaflet\css\leaflet.css">
+
+
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> -->
+
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Toaster Message Styles -->
-    <style>
-        .toaster-container {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 10000;
-            max-width: 400px;
-        }
-
-        .toaster-message {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px 20px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transform: translateX(400px);
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border-left: 4px solid #fbbf24;
-        }
-
-        .toaster-message.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .toaster-message.hide {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-
-        .toaster-message.success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-left-color: #34d399;
-        }
-
-        .toaster-message.error {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            border-left-color: #f87171;
-        }
-
-        .toaster-icon {
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .toaster-content {
-            flex: 1;
-        }
-
-        .toaster-title {
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .toaster-text {
-            font-size: 13px;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-
-        .toaster-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-            padding: 4px;
-            border-radius: 4px;
-        }
-
-        .toaster-close:hover {
-            opacity: 1;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .progress-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: rgba(255,255,255,0.5);
-            width: 100%;
-            border-radius: 0 0 12px 12px;
-            overflow: hidden;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: white;
-            animation: progress 5s linear forwards;
-        }
-
-        @keyframes progress {
-            from { width: 100%; }
-            to { width: 0%; }
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .toaster-container {
-                top: 80px;
-                right: 10px;
-                left: 10px;
-                max-width: none;
-            }
-
-            .toaster-message {
-                transform: translateY(-100px);
-            }
-
-            .toaster-message.show {
-                transform: translateY(0);
-            }
-
-            .toaster-message.hide {
-                transform: translateY(-100px);
-            }
-        }
-    </style>
 </head>
 
 <body class="text-white overflow-x-hidden">
@@ -1028,22 +908,22 @@
                     <h3 class="text-2xl font-bold mb-6 text-center text-yellow-400">Send Message</h3>
 
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
                         <input type="text" name="name" placeholder="Your Name" required
                             class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
                         <input type="email" name="email" placeholder="Your Email" required
                             class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Subject *</label>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
                         <input type="text" name="subject" placeholder="Subject" required
                             class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Message *</label>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Message</label>
                         <textarea name="message" placeholder="Your Message" rows="6" required
                             class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg px-6 py-4 focus:outline-none focus:border-yellow-400 transition-colors text-white placeholder-gray-400"></textarea>
                     </div>
