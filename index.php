@@ -10,8 +10,8 @@
     <script src="assets\jquery.min.js"></script>
     
     <script src="assets\owlcarousel\js\owl.carousel.min.js"></script>
-    <script src="assets\fontawesome\css\all.min.css"></script>
-    <script src="assets\fontawesome\js\all.min.js"></script>
+    <!-- <script src="assets\fontawesome\css\all.min.css"></script>
+    <script src="assets\fontawesome\js\all.min.js"></script> -->
 
     <link rel="stylesheet" href="assets\owlcarousel\css\owl.carousel.min.css">
     <link rel="stylesheet" href="assets\owlcarousel\css\owl.theme.default.min.css">
@@ -19,10 +19,10 @@
 
 
 
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> -->
@@ -81,7 +81,7 @@
                     <i class="fas fa-code text-black text-2xl"></i>
                 </div>
                 <p class="text-xs text-gray-400 font-semibold">Portfolio</p>
-                <p class="text-xs text-yellow-400 font-bold">2025</p>
+                <p class="text-xs text-yellow-400 font-bold"><?php echo date("Y"); ?></p>
             </div>
         </div>
     </div>
@@ -939,7 +939,7 @@
 
     <!-- Footer -->
     <footer class="bg-black py-8 text-center border-t border-gray-800">
-        <p class="text-gray-400 text-lg">&copy; 2025 Amit Gautam Portfolio.</p>
+        <p class="text-gray-400 text-lg">&copy; <?php echo date("Y"); ?> Amit Gautam Portfolio.</p>
     </footer>
 
     <script src="script.js"></script>
