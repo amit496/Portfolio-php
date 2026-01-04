@@ -72,7 +72,7 @@ $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 $subject = htmlspecialchars($subject, ENT_QUOTES, 'UTF-8');
 $message = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
 $date = date('d M Y, h:i A');
-
+$year = date('Y');
 // Gmail SMTP Config
 $SMTP_HOST = "smtp.gmail.com";
 $SMTP_USER = "gautamamit557@gmail.com";
@@ -149,7 +149,7 @@ try {
             </div>
             <div class='footer'>
                 <p><strong>Amit Gautam Portfolio</strong></p>
-                <p>© 2025 All Rights Reserved</p>
+                <p>© $year All Rights Reserved</p>
             </div>
         </div>
     </body>
@@ -224,7 +224,7 @@ try {
             <div class='footer'>
                 <p><strong>Amit Gautam</strong></p>
                 <p>Software Engineer | Full Stack Developer</p>
-                <p style='margin-top: 10px; font-size: 12px; opacity: 0.8;'>© 2025 All Rights Reserved</p>
+                <p style='margin-top: 10px; font-size: 12px; opacity: 0.8;'>© $year All Rights Reserved</p>
             </div>
         </div>
     </body>
