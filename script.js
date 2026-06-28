@@ -126,17 +126,7 @@ $(document).ready(function () {
 
     // Resume Download Function
     window.downloadResume = function () {
-        const fileId = '1H8WdpXvkH28CiZyjOQiec_S6_lylCIhr';
-        const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = 'amit-gautam.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        alert('Resume download started!');
+        window.open('resume.php?download=1', '_blank');
     };
 
     // Show visiting card after 3 seconds

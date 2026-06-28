@@ -73,7 +73,7 @@
                     </p>
                     <p><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i>Aminabad, Lucknow, Uttar Pradesh, India
                     </p>
-                    <p><i class="fas fa-calendar mr-2 text-yellow-400"></i>3+ Years Experience</p>
+                    <p><i class="fas fa-calendar mr-2 text-yellow-400"></i>3.5+ Years Experience</p>
                 </div>
             </div>
             <div class="text-right">
@@ -157,7 +157,7 @@
                     Software Engineer & Problem Solver
                 </div>
                 <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto opacity-90 leading-relaxed">
-                    I'm a passionate software engineer with 3+ years of experience in building
+                    I'm a passionate software engineer with 3.5+ years of experience in building
                     scalable web applications using modern technologies like PHP, Laravel, JavaScript, and MySQL.
                 </p>
                 <div class="space-x-4 flex flex-wrap justify-center gap-4">
@@ -184,7 +184,7 @@
                 <div class="card-3d glass-effect p-10 rounded-3xl">
                     <h3 class="text-3xl font-bold mb-6 text-yellow-400">My Journey</h3>
                     <p class="text-lg mb-6 opacity-90 leading-relaxed">
-                        I'm a dedicated software engineer with 3+ years of hands-on experience in full-stack
+                        I'm a dedicated software engineer with 3.5+ years of hands-on experience in full-stack
                         development. My expertise spans across modern web technologies including PHP, Laravel,
                         JavaScript, and database management.
                     </p>
@@ -447,9 +447,33 @@
             <div class="experience-timeline">
                 <div class="experience-item card-3d glass-effect p-8 rounded-2xl experience-equal-height">
                     <div class="card-content">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Software Engineer</h3>
+                        <h4 class="text-xl text-white mb-2">Skystone AI Tech Private Limited</h4>
+                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>Jan 2026 - Present</p>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Currently working as a Laravel Developer / Software Engineer at Skystone AI Tech Private
+                            Limited, contributing to the development of scalable, secure, and high-performance web
+                            applications. Responsible for designing and implementing backend architectures, RESTful
+                            APIs, and database-driven solutions using Laravel, PHP, MySQL, and modern web
+                            technologies. Actively collaborating with cross-functional teams to integrate AI-driven
+                            features, optimize application performance, and ensure clean, maintainable code following
+                            industry best practices.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-stack">Laravel</span>
+                            <span class="tech-stack">PHP</span>
+                            <span class="tech-stack">MySQL</span>
+                            <span class="tech-stack">REST API</span>
+                            <span class="tech-stack">AI Integration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item card-3d glass-effect p-8 rounded-2xl experience-equal-height">
+                    <div class="card-content">
                         <h3 class="text-2xl font-bold text-yellow-400 mb-2">Senior Software Engineer</h3>
                         <h4 class="text-xl text-white  mb-2">Jamtech Technologies Pvt Ltd</h4>
-                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>June 2025 - Present</p>
+                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>Jun 2025 - Jan 2026</p>
                         <p class="text-gray-300 leading-relaxed mb-4">
                             Leading development of enterprise-level web applications using Laravel and modern JavaScript
                             frameworks.
@@ -473,7 +497,7 @@
                     <div class="card-content">
                         <h3 class="text-2xl font-bold text-yellow-400 mb-2">Full Stack Developer</h3>
                         <h4 class="text-xl text-white mb-2">Singsys : Mobile & Web Application Development Company</h4>
-                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>May 2024 - May 2025</p>
+                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>May 2024 - Jun 2025</p>
                         <p class="text-gray-300 leading-relaxed mb-4">
                             Developed and maintained multiple client projects using PHP, Laravel, and modern front-end
                             technologies.
@@ -495,33 +519,9 @@
 
                 <div class="experience-item card-3d glass-effect p-8 rounded-2xl experience-equal-height">
                     <div class="card-content">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Backend Developer</h3>
-                        <h4 class="text-xl text-white mb-2">Inventics Software Pvt Ltd</h4>
-                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>March 2024 - April 2024</p>
-                        <p class="text-gray-300 leading-relaxed mb-4">
-                            Focused on server-side development and database optimization. Implemented RESTful APIs and
-                            improved
-                            application performance through efficient database queries and caching strategies. Reduced
-                            API response
-                            time by 40% through optimization techniques and implemented robust security measures for
-                            data protection.
-                            Worked closely with frontend teams to ensure seamless integration and optimal user
-                            experience.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="tech-stack">PHP</span>
-                            <span class="tech-stack">MySQL</span>
-                            <span class="tech-stack">REST API</span>
-                            <span class="tech-stack">Git</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="experience-item card-3d glass-effect p-8 rounded-2xl experience-equal-height">
-                    <div class="card-content">
                         <h3 class="text-2xl font-bold text-yellow-400 mb-2">Junior Web Developer</h3>
                         <h4 class="text-xl text-white mb-2">Quick Infotech Technologies Private Limited</h4>
-                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>May 2022 - February 2024</p>
+                        <p class="text-gray-400 mb-4"><i class="fas fa-calendar mr-2"></i>May 2022 - Feb 2024</p>
                         <p class="text-gray-300 leading-relaxed mb-4">
                             Started professional journey building dynamic websites and learning industry best practices.
                             Gained expertise in HTML, CSS, JavaScript, and began working with PHP and MySQL databases.
